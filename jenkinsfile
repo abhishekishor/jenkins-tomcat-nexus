@@ -30,5 +30,19 @@ pipeline {
             }
         }
         
+        stage ("Upload War File") {
+            
+            steps {
+                
+                sshagent(['tomcat-server']) {
+                        
+                        sh "scp -o StrictHostKeyChecking=no $WORKSPACE/target/maven-web-application.war ubuntu@54.255.237.208:/opt/tomcat/webapps"
+                        
+                }
+                
+            }
+            
+        }
+        
     }
 }
